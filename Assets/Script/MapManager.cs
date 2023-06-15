@@ -16,6 +16,7 @@ public class MapManager : MonoBehaviour
     public Dictionary<Vector2Int, Tile> map;
     void Awake()
     {
+       
         if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
@@ -54,6 +55,7 @@ public class MapManager : MonoBehaviour
                             var overlayTile = Instantiate(overlayTilePrefab, overlayContainer.transform);
                             var cellWorldPosition = tilemaps[i].GetCellCenterWorld(tileLocation);
                             overlayTile.gridLocation = tileLocation;
+                            overlayTile.tileKey = tileKey;
                             overlayTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z + 1);
 
 
