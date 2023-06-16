@@ -15,7 +15,7 @@ public class Tile : MonoBehaviour
     public Vector3Int gridLocation;
     public Vector2Int tileKey;
     public GameObject unit;
-
+    public List<Tile> neighborTile;
 
     void Awake()
     {
@@ -44,6 +44,13 @@ public class Tile : MonoBehaviour
     public void SetTerrain(MapTerrain terrain)
     {
         this.terrain = terrain;
+    }
+    public List<Tile> GetNeighborTiles(Tile currentTiles)
+    {
+        var center = this.transform;
+
+        //top neighbour
+        return null;
     }
 
     public void OnTriggerEnter2D(Collider2D collision)

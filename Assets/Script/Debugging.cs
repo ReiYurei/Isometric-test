@@ -6,8 +6,11 @@ using UnityEngine.Tilemaps;
 public class Debugging : MonoBehaviour
 {
 
-    public Vector3Int coordinate;
+    public Vector3 coordinate;
+
+    public MouseController mouse;
     public List<Tilemap> tilemaps;
+    
 
     private void Start()
     {
@@ -20,13 +23,50 @@ public class Debugging : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (mouse.tiles.Count > 0)
         {
-            bool checkTile = tilemaps[0].HasTile(coordinate);
-            Debug.Log(checkTile);
+            coordinate = mouse.tiles[0].transform.position;
         }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-        }
+       
+    }
+
+
+
+
+
+    public int numPoints;
+    public float RadiusX;
+    public float radiusX
+    {
+        get { return RadiusX * 0.75f; }
+    }
+    public float RadiusY
+    {
+        get { return radiusX * 0.5f; }
+    }
+    float radiusY;
+    private void OnDrawGizmos()
+    {
+        radiusY = RadiusY;
+
+        Vector3 center = new Vector3(coordinate.x, coordinate.y, coordinate.z);
+
+
+            
+            Gizmos.color = Color.red;
+            float angleIncrement = 2f * Mathf.PI / numPoints;
+
+            Vector3 prevPoint = center + new Vector3(radiusX, 0f, 0f);
+            for (int i = 1; i <= numPoints; i++)
+            {
+                float angle = i * angleIncrement;
+                float x = center.x + radiusX * Mathf.Cos(angle);
+                float y = center.y + radiusY * Mathf.Sin(angle);
+                Vector3 nextPoint = new Vector3(x, y, center.z);
+                Gizmos.DrawLine(prevPoint, nextPoint);
+                prevPoint = nextPoint;
+            }
+       
+        
     }
 }

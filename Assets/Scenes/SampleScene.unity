@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &86061948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,8 +292,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000030518, y: -122}
-  m_SizeDelta: {x: 451.9992, y: 78.1318}
+  m_AnchoredPosition: {x: -1053.5873, y: -636.628}
+  m_SizeDelta: {x: 316.8246, y: 75.3879}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &216952297
 MonoBehaviour:
@@ -437,8 +437,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fe8327487e84e54c85d326f7620fb21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coordinate: {x: 0, y: 0, z: 0}
+  coordinate: {x: -2, y: 0, z: 0}
+  mouse: {fileID: 9030283044206609034}
   tilemaps: []
+  numPoints: 8
+  RadiusX: 1
 --- !u!114 &308179906
 MonoBehaviour:
   m_ObjectHideFlags: 0
