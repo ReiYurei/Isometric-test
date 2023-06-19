@@ -12,7 +12,8 @@ public class MapManager : MonoBehaviour
     public Tile overlayTilePrefab;
     public GameObject overlayContainer;
     public List<Tilemap> tilemaps;
-    
+    public List<Tile> tiles;
+
     public Dictionary<Vector2Int, Tile> map;
     void Awake()
     {
@@ -54,7 +55,7 @@ public class MapManager : MonoBehaviour
                         {
                             var overlayTile = Instantiate(overlayTilePrefab, overlayContainer.transform);
                             var cellWorldPosition = tilemaps[i].GetCellCenterWorld(tileLocation);
-                            overlayTile.gridLocation = tileLocation;
+                            overlayTile.gridLocation = cellWorldPosition;
                             overlayTile.tileKey = tileKey;
                             overlayTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z + 1);
 

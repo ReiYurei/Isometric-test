@@ -12,7 +12,7 @@ public class Tile : MonoBehaviour
 {
     Color color;
     public MapTerrain terrain;
-    public Vector3Int gridLocation;
+    public Vector3 gridLocation;
     public Vector2Int tileKey;
     public GameObject unit;
     public List<Tile> neighborTile;

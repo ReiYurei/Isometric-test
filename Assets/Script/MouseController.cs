@@ -9,12 +9,10 @@ public class MouseController : MonoBehaviour
 {
     Vector3 mousePos;
     Vector2 mousePos2d;
-    public List<Tile> tiles;
 
-    public InputActionAsset actions;
     private void Awake()
     {
-        actions.FindActionMap("Battlefield").FindAction("Confirm").performed += OnClick;
+       
         
     }
     private void Update()
@@ -41,28 +39,21 @@ public class MouseController : MonoBehaviour
         {
             var tile = selectedTile.Value.collider.gameObject.GetComponent<Tile>();
             var tilePosition = tile.gridLocation;
-            if (tiles.Count <= 0)
+            if (GameManager.Instance.MapManager.tiles.Count <= 0)
             {
-                tiles.Add(tile);
-                tiles[0].ShowTile();
+                GameManager.Instance.MapManager.tiles.Add(tile);
+                GameManager.Instance.MapManager.tiles[0].ShowTile();
 
-            }
+            }        
             else
             {
-                tiles[0].HideTile();
-                tiles.RemoveAt(0);
-                tiles.Add(tile);
-                tiles[0].ShowTile();
+                GameManager.Instance.MapManager.tiles[0].HideTile();
+                GameManager.Instance.MapManager.tiles.RemoveAt(0);
+                GameManager.Instance.MapManager.tiles.Add(tile);
+                GameManager.Instance.MapManager.tiles[0].ShowTile();
                 
             }
 
-
-
-            //DEBUGGING TOOLS
-            Debug.Log(tile.terrain);
-            Debug.Log(tilePosition);
-            Debug.Log(tile.unit);
-            Debug.Log(MapManager.Instance.map[tile.tileKey].tileKey);
         }
         
         
@@ -78,12 +69,12 @@ public class MouseController : MonoBehaviour
     }
 
 
-    void OnEnable()
-    {
-        actions.FindActionMap("Battlefield").Enable();
-    }
-    void OnDisable()
-    {
-        actions.FindActionMap("Battlefield").Disable();
-    }
+   // void OnEnable()
+   // {
+   //     actions.FindActionMap("Player Turn Input").Enable();
+   // }
+   // void OnDisable()
+   // {
+   //     actions.FindActionMap("Player Turn Input").Disable();
+   // }
 }
