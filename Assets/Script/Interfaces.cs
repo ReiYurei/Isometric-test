@@ -7,9 +7,14 @@ public interface IInteractable
     void Interact();
 }
 
-public interface ICommand
+public interface IBattleCommand
 {
     int MotionWeight { get; }
-    int UnitSpeed { get; }
+    int  UnitSpeed { get; }
     void Execute(); 
+}
+
+public interface IDamageable
+{
+    void OnDamage();
 }

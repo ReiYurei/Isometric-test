@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TestCommandManager : MonoBehaviour
 {
-    [SerializeField] List<ICommand> commands = new List<ICommand>();
+    [SerializeField] List<IBattleCommand> commands = new List<IBattleCommand>();
 
     
     private void Start()
@@ -33,14 +33,14 @@ public class TestCommandManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            foreach (ICommand command in commands)
+            foreach (IBattleCommand command in commands)
             {
                 command.Execute();
             }
         }
         if (Input.GetKeyDown(KeyCode.T))
         {
-            foreach (ICommand command in commands)
+            foreach (IBattleCommand command in commands)
             {
                 Debug.Log(command.MotionWeight);
             }

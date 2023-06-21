@@ -10,26 +10,32 @@ public class MouseController : MonoBehaviour
     Vector3 mousePos;
     Vector2 mousePos2d;
 
+    private InputActionAsset actions;
+
     private void Awake()
     {
-       
-        
+        actions = GameManager.Instance.InputManager.Actions;
+        actions.FindAction("Click").performed += OnClick;
+
     }
     private void Update()
     {
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos = Camera.main.ScreenToWorldPoint(actions.FindAction("MousePos").ReadValue<Vector2>());
         mousePos2d = new Vector2(mousePos.x, mousePos.y);
     }
     void LateUpdate()
     {
-        var selectedTile = GetPositionOnTile();      
-        if (selectedTile.HasValue)
+        OnMouseHover();
+    }
+    void OnMouseHover()
+    {
+        var hoveredTile = GetPositionOnTile();
+        if (hoveredTile.HasValue)
         {
-            GameObject overlayTile = selectedTile.Value.collider.gameObject;
-            var tile = overlayTile.GetComponent<Tile>();
-            transform.position = overlayTile.transform.position;
+            var tile = hoveredTile.Value.collider.gameObject.GetComponent<Tile>();
+            transform.position = tile.WorldSpacePos;
+            GameManager.Instance.SelectionManager.OnHoverInfo(tile, tile.UnitObject);
         }
-
     }
 
     public void OnClick(InputAction.CallbackContext context)
@@ -38,20 +44,22 @@ public class MouseController : MonoBehaviour
         if (selectedTile.HasValue)
         {
             var tile = selectedTile.Value.collider.gameObject.GetComponent<Tile>();
-            var tilePosition = tile.gridLocation;
-            if (GameManager.Instance.MapManager.tiles.Count <= 0)
+            if (GameManager.Instance.MapManager.Tiles.Count <= 0)
             {
-                GameManager.Instance.MapManager.tiles.Add(tile);
-                GameManager.Instance.MapManager.tiles[0].ShowTile();
+                GameManager.Instance.MapManager.Tiles.Add(tile);
+                GameManager.Instance.MapManager.Tiles[0].ShowTile();
+                GameManager.Instance.SelectionManager.OnSelectInfo(tile, tile.UnitObject, tile.TileKey, tile.WorldSpacePos);
+
 
             }        
             else
             {
-                GameManager.Instance.MapManager.tiles[0].HideTile();
-                GameManager.Instance.MapManager.tiles.RemoveAt(0);
-                GameManager.Instance.MapManager.tiles.Add(tile);
-                GameManager.Instance.MapManager.tiles[0].ShowTile();
-                
+                GameManager.Instance.MapManager.Tiles[0].HideTile();
+                GameManager.Instance.MapManager.Tiles.RemoveAt(0);
+                GameManager.Instance.MapManager.Tiles.Add(tile);
+                GameManager.Instance.MapManager.Tiles[0].ShowTile();
+                GameManager.Instance.SelectionManager.OnSelectInfo(tile, tile.UnitObject, tile.TileKey, tile.WorldSpacePos);
+
             }
 
         }
@@ -68,13 +76,25 @@ public class MouseController : MonoBehaviour
         return null;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Unit")
+        {
+            GetGameObject(collision.gameObject);
+        }
+;
+    }
 
-   // void OnEnable()
-   // {
-   //     actions.FindActionMap("Player Turn Input").Enable();
-   // }
-   // void OnDisable()
-   // {
-   //     actions.FindActionMap("Player Turn Input").Disable();
-   // }
+    GameObject GetGameObject(GameObject standingObject)
+    {
+        return standingObject;
+    }
+    // void OnEnable()
+    // {
+    //     actions.FindActionMap("Player Turn Input").Enable();
+    // }
+    // void OnDisable()
+    // {
+    //     actions.FindActionMap("Player Turn Input").Disable();
+    // }
 }

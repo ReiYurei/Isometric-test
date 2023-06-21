@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public StateManager StateManager;
     public InputManager InputManager;
     public MapManager MapManager;
-
+    public SelectionManager SelectionManager;
 
     
     void Awake()

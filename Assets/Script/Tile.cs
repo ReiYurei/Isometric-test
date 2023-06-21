@@ -11,11 +11,12 @@ public enum MapTerrain
 public class Tile : MonoBehaviour
 {
     Color color;
-    public MapTerrain terrain;
-    public Vector3 gridLocation;
-    public Vector2Int tileKey;
-    public GameObject unit;
-    public List<Tile> neighborTile;
+    public MapTerrain Terrain;
+    public Vector3 WorldSpacePos;
+    public Vector2Int TileKey;
+    public GameObject UnitObject;
+    public List<Tile> NeighborTile;
+    public bool isOccuppied;
 
     void Awake()
     {
@@ -43,7 +44,7 @@ public class Tile : MonoBehaviour
     }
     public void SetTerrain(MapTerrain terrain)
     {
-        this.terrain = terrain;
+        this.Terrain = terrain;
     }
     public List<Tile> GetNeighborTiles(Tile currentTiles)
     {
@@ -59,13 +60,16 @@ public class Tile : MonoBehaviour
         if (collision.gameObject.layer == 6)
         {
             
-            this.unit = collision.gameObject;
+            this.UnitObject = collision.gameObject;
+            isOccuppied = true;
         }
+
 
     }
     public void OnTriggerExit2D(Collider2D collision)
     {
-        this.unit = null;
+        this.UnitObject = null;
+        isOccuppied = false;
     }
   
 }

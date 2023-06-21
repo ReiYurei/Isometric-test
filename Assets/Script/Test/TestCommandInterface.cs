@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestCommandInterface : ICommand 
+public class TestCommandInterface : IBattleCommand
 {
    
     string command = "Hihihihi";
@@ -14,7 +14,7 @@ public class TestCommandInterface : ICommand
         Debug.Log(command);
     }
 }
-public class TestCommandInterface2 : ICommand
+public class TestCommandInterface2 : IBattleCommand
 {
     public int MotionWeight { get; set; }
     public int UnitSpeed { get; set; }
@@ -26,9 +26,9 @@ public class TestCommandInterface2 : ICommand
     }
 }
 
-public class TestCommandComparer : IComparer<ICommand>
+public class TestCommandComparer : IComparer<IBattleCommand>
 {
-    public int Compare(ICommand x, ICommand y)
+    public int Compare(IBattleCommand x, IBattleCommand y)
     {
         if (x.MotionWeight.CompareTo(y.MotionWeight) == 0)
         {
@@ -38,7 +38,7 @@ public class TestCommandComparer : IComparer<ICommand>
         return x.MotionWeight.CompareTo(y.MotionWeight);
     }
 
-    public int Compare2(ICommand x, ICommand y)
+    public int Compare2(IBattleCommand x, IBattleCommand y)
     {
         return x.UnitSpeed.CompareTo(y.UnitSpeed);
     }

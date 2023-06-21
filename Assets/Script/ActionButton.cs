@@ -42,11 +42,11 @@ public class ActionButton : MonoBehaviour
             case 1:
                 break;
             case 2: //Move
-                if (GameManager.Instance.MapManager.tiles[0].unit != null)
+                if (GameManager.Instance.MapManager.Tiles[0].UnitObject != null)
                 {
                     foreach (KeyValuePair<Vector2Int, Tile> tiles in MapManager.Instance.map)
                     {
-                        if (tiles.Value.terrain == MapTerrain.Ground)
+                        if (tiles.Value.Terrain == MapTerrain.Ground)
                         {
                             tiles.Value.ShowTile();
                         }

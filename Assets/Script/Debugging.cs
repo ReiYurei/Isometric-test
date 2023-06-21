@@ -23,13 +23,13 @@ public class Debugging : MonoBehaviour
     }
     void Update()
     {
-        if (GameManager.Instance.MapManager.tiles.Count > 0)
+        if (GameManager.Instance.MapManager.Tiles.Count > 0)
         {
-            coordinate = GameManager.Instance.MapManager.tiles[0].transform.position;
+            coordinate = GameManager.Instance.MapManager.Tiles[0].transform.position;
         }
-        else if (GameManager.Instance.MapManager.tiles.Count >= 1)
+        else if (GameManager.Instance.MapManager.Tiles.Count >= 1)
         {
-            coordinate = GameManager.Instance.MapManager.tiles[1].transform.position;
+            coordinate = GameManager.Instance.MapManager.Tiles[1].transform.position;
         }
 
     }

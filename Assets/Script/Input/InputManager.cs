@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
 
-    public InputActionAsset actions; 
+    public InputActionAsset Actions; 
     StateManager stateManager;
     private void Start()
     {
@@ -19,19 +19,19 @@ public class InputManager : MonoBehaviour
         switch (state)
         {
             case BattleBeginState:
-                actions.FindActionMap("Player Turn Input").Disable();
-                actions.FindActionMap("UI").Enable();
+                Actions.FindActionMap("Player Turn Input").Disable();
+                Actions.FindActionMap("Menu UI").Enable();
                 
                 break;
             case EnemyTurnState:
-                actions.FindActionMap("Player Turn Input").Disable();
-                actions.FindActionMap("UI").Enable();
+                Actions.FindActionMap("Player Turn Input").Disable();
+                Actions.FindActionMap("Menu UI").Enable();
                 
                 break;
 
             case PlayerTurnState:
-                actions.FindActionMap("Player Turn Input").Enable();
-                actions.FindActionMap("UI").Enable();
+                Actions.FindActionMap("Player Turn Input").Enable();
+                Actions.FindActionMap("Menu UI").Enable();
                 
                 break;
         }
