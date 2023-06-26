@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour
 {
+
+
     GameBaseState currentState;
-    GameBaseState previousState;
+    public GameBaseState previousState;
     public int turnCount;
 
     public delegate void OnStateChangeHandler(GameBaseState state);
@@ -15,10 +17,15 @@ public class StateManager : MonoBehaviour
     public BattleBeginState BattleBeginState = new BattleBeginState();
     public PlayerTurnState PlayerTurnState = new PlayerTurnState();
     public EnemyTurnState EnemyTurnState = new EnemyTurnState();
-
-    private void Start()
+    public PlayerActionState PlayerActionState = new PlayerActionState();
+    public ActionUIState UIState = new ActionUIState();
+    
+    private void OnEnable()
     {
         turnCount = 1;
+    }
+    private void Start()
+    {
         currentState = BattleBeginState;
         currentState.EnterState(this);
     }
@@ -43,14 +50,19 @@ public class StateManager : MonoBehaviour
 
     public void Message(string message)
     {
-        StartCoroutine(OnDelay(message));
-    
+        Debug.Log(message);
+
     }
 
-    IEnumerator OnDelay(string message)
+
+    public void YieldExit(int time)
     {
-        Debug.Log(message);
-        yield return new WaitForSeconds(1f);
+        StartCoroutine(OnDelay(time));
+    }
+    IEnumerator OnDelay(int time)
+    {
+        
+        yield return new WaitForSeconds(time);
         currentState.ExitState(this);
     }
 }

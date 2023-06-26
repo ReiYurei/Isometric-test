@@ -9,8 +9,8 @@ public class Unit : MonoBehaviour, IInteractable, IDamageable
     [SerializeField] public UnitStatus status;
     void Start()
     {
-        status.healthPoint = status.MaxHP;
-        Debug.Log($"{gameObject.name}'s Speed = {status.unitSpeed}");
+        status.HealthPoint = status.MaxHP;
+        Debug.Log($"{gameObject.name}'s Speed = {status.UnitSpeed}");
     }
     
     public void Interact()

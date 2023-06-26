@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour
     public InputManager InputManager;
     public MapManager MapManager;
     public SelectionManager SelectionManager;
+    public UIManager UIManager;
 
-    
     void Awake()
     {
 
@@ -22,6 +22,13 @@ public class GameManager : MonoBehaviour
         else
         {
             _instance = this;
+            DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(StateManager);
+            DontDestroyOnLoad(InputManager);
+            DontDestroyOnLoad(MapManager);
+            DontDestroyOnLoad(SelectionManager);
+            DontDestroyOnLoad(UIManager);
+
         }
     }
 }

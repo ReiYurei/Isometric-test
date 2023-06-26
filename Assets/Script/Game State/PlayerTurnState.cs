@@ -7,12 +7,14 @@ public class PlayerTurnState : GameBaseState
     public override void EnterState(StateManager state)
     {
         state.OnChangeState();
-        state.Message($"Player Turn!");
-        
+        state.YieldExit(1);
+
+
     }
 
     public override void ExitState(StateManager state)
     {
+        state.SetState(state.PlayerActionState);
     }
 
     public override void UpdateState(StateManager state)

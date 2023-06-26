@@ -22,8 +22,10 @@ public class ActionButton : MonoBehaviour
     void Start()
     {
         var button = gameObject.GetComponent<UnityEngine.UI.Button>();
-        button.onClick.AddListener(Action);
+        button.onClick.AddListener(Action); 
+        
     }
+  
     void Action()
     {
         OnAction(buttonType);
@@ -44,7 +46,7 @@ public class ActionButton : MonoBehaviour
             case 2: //Move
                 if (GameManager.Instance.MapManager.Tiles[0].UnitObject != null)
                 {
-                    foreach (KeyValuePair<Vector2Int, Tile> tiles in MapManager.Instance.map)
+                    foreach (KeyValuePair<Vector2Int, Tile> tiles in GameManager.Instance.MapManager.map)
                     {
                         if (tiles.Value.Terrain == MapTerrain.Ground)
                         {
@@ -56,7 +58,7 @@ public class ActionButton : MonoBehaviour
                 
                 break;
             case 8: //Cancel
-                foreach (KeyValuePair<Vector2Int, Tile> tiles in MapManager.Instance.map)
+                foreach (KeyValuePair<Vector2Int, Tile> tiles in GameManager.Instance.MapManager.map)
                 {
                     tiles.Value.HideTile();
                 }

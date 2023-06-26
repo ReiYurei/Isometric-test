@@ -6,8 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class MapManager : MonoBehaviour
 {
-    private static MapManager _instance;
-    public static MapManager Instance { get { return _instance; } }
+
 
     public Tile OverlayTilePrefab;
     public GameObject OverlayContainer;
@@ -15,18 +14,7 @@ public class MapManager : MonoBehaviour
     public List<Tile> Tiles;
 
     public Dictionary<Vector2Int, Tile> map;
-    void Awake()
-    {
-       
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            _instance = this;
-        }
-    }
+
     private void Start()
     {
         map = new Dictionary<Vector2Int, Tile>();

@@ -7,8 +7,9 @@ public class BattleBeginState : GameBaseState
     public override void EnterState(StateManager state)
     {
         state.OnChangeState();
-        state.Message($"Battle Begin! Turn {state.turnCount}");
-        
+        state.YieldExit(1);
+
+
     }
 
     public override void ExitState(StateManager state)

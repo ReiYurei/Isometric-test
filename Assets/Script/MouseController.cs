@@ -15,12 +15,12 @@ public class MouseController : MonoBehaviour
     private void Awake()
     {
         actions = GameManager.Instance.InputManager.Actions;
-        actions.FindAction("Click").performed += OnClick;
+        actions.FindActionMap("Player Turn").FindAction("Click").performed += OnClick;
 
     }
     private void Update()
     {
-        mousePos = Camera.main.ScreenToWorldPoint(actions.FindAction("MousePos").ReadValue<Vector2>());
+        mousePos = Camera.main.ScreenToWorldPoint(actions.FindActionMap("Player Turn").FindAction("MousePos").ReadValue<Vector2>());
         mousePos2d = new Vector2(mousePos.x, mousePos.y);
     }
     void LateUpdate()
@@ -32,9 +32,8 @@ public class MouseController : MonoBehaviour
         var hoveredTile = GetPositionOnTile();
         if (hoveredTile.HasValue)
         {
-            var tile = hoveredTile.Value.collider.gameObject.GetComponent<Tile>();
-            transform.position = tile.WorldSpacePos;
-            GameManager.Instance.SelectionManager.OnHoverInfo(tile, tile.UnitObject);
+            var tile = hoveredTile.Value.collider.gameObject;
+            transform.position = tile.transform.position;
         }
     }
 
@@ -49,6 +48,8 @@ public class MouseController : MonoBehaviour
                 GameManager.Instance.MapManager.Tiles.Add(tile);
                 GameManager.Instance.MapManager.Tiles[0].ShowTile();
                 GameManager.Instance.SelectionManager.OnSelectInfo(tile, tile.UnitObject, tile.TileKey, tile.WorldSpacePos);
+                
+                
 
 
             }        
