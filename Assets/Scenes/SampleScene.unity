@@ -1368,6 +1368,7 @@ MonoBehaviour:
     maxHP: 100
     healthPoint: 0
     speed: 100
+    walkable: 0100000000000000
     turnChances: 2
     moveRange: 2
     attackPower: 20
@@ -1827,6 +1828,7 @@ MonoBehaviour:
   coordinate: {x: -2, y: 0, z: 0}
   mouse: {fileID: 9030283044206609034}
   tilemaps: []
+  Actions: {fileID: -944628639613478452, guid: 1d8bd85a9eb5955448160c0da3ace872, type: 3}
   numPoints: 8
   RadiusX: 1
 --- !u!114 &308179906
@@ -2189,6 +2191,7 @@ MonoBehaviour:
     maxHP: 0
     healthPoint: 0
     speed: 90
+    walkable: 01000000
     turnChances: 3
     moveRange: 5
     attackPower: 10
@@ -2368,6 +2371,7 @@ MonoBehaviour:
       maxHP: 0
       healthPoint: 0
       speed: 0
+      walkable: 
       turnChances: 0
       moveRange: 0
       attackPower: 0
@@ -2383,6 +2387,7 @@ MonoBehaviour:
       maxHP: 0
       healthPoint: 0
       speed: 0
+      walkable: 
       turnChances: 0
       moveRange: 0
       attackPower: 0
@@ -2932,6 +2937,7 @@ MonoBehaviour:
     maxHP: 150
     healthPoint: 0
     speed: 110
+    walkable: 01000000
     turnChances: 2
     moveRange: 5
     attackPower: 20

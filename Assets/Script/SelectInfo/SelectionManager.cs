@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class SelectionManager : MonoBehaviour
 {
-    public OnHoverSelectionInfo SelectedInfo { get => selectedInfo; private set => hoverInfo = value; }
-    [SerializeField] OnHoverSelectionInfo selectedInfo;
-    public OnHoverSelectionInfo HoverInfo { get => hoverInfo; private set => hoverInfo = value; }
-    [SerializeField] OnHoverSelectionInfo hoverInfo;
+    public SelectionInfo SelectedInfo { get => selectedInfo; private set => hoverInfo = value; }
+    [SerializeField] SelectionInfo selectedInfo;
+    public SelectionInfo HoverInfo { get => hoverInfo; private set => hoverInfo = value; }
+    [SerializeField] SelectionInfo hoverInfo;
     public void OnSelectInfo(Tile tile, GameObject selectedObject, Vector2Int tileKey, Vector3 worldSpacePos)
     {
         SelectedInfo.Tile = tile;
@@ -18,10 +18,9 @@ public class SelectionManager : MonoBehaviour
         OnSelectUnitInfo();
 
     }
-    public void OnHoverInfo(Tile tile, GameObject selectedObject)
+    public void OnHoverInfo(Tile tile)
     {
-        HoverInfo.Tile = tile;
-        HoverInfo.StandingObject = selectedObject;
+        HoverInfo.Tile = tile;       
         HoverInfo.Terrain = HoverInfo.Tile.Terrain;
         OnHoverUnitInfo();
 

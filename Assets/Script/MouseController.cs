@@ -34,6 +34,7 @@ public class MouseController : MonoBehaviour
         {
             var tile = hoveredTile.Value.collider.gameObject;
             transform.position = tile.transform.position;
+            GameManager.Instance.SelectionManager.OnHoverInfo(tile.GetComponent<Tile>());
         }
     }
 

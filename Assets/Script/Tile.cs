@@ -10,24 +10,29 @@ public enum MapTerrain
 
 public class Tile : MonoBehaviour
 {
-    Color color;
-    public MapTerrain Terrain;
-    public Vector3 WorldSpacePos;
-    public Vector2Int TileKey;
-    public GameObject UnitObject;
-    public List<Tile> NeighborTile;
-    public bool isOccuppied;
+    
+    public float HCost; //Cost to Goal
+    public float GCost; //Cost from start
+    public float FCost { get => HCost + GCost; }
+    public Tile previousTile;
+
+    public Color Color { get => color; }
+    [SerializeField] Color color;
+    public MapTerrain Terrain { get => terrain; }
+    [SerializeField] MapTerrain terrain;
+    public Vector3 WorldSpacePos { get => worldSpacePos; }
+    [SerializeField] Vector3 worldSpacePos;
+    public Vector2Int TileKey { get => tileKey; }
+    [SerializeField] Vector2Int tileKey;
+    public GameObject UnitObject { get => unitObject; }
+    [SerializeField] GameObject unitObject;
+    public bool IsOccuppied { get => isOccuppied; }
+    [SerializeField] bool isOccuppied;
 
     void Awake()
     {
         
 
-    }
-
-    private void Update()
-    {
-
-       
     }
     public void ShowTile()
     {
@@ -42,16 +47,20 @@ public class Tile : MonoBehaviour
     {
         color = new Color(r, g, b, a);
     }
+
+
+
+    public void SetTileKey(Vector2Int tilekey)
+    {
+        this.tileKey = tilekey;
+    }
+    public void SetWorldPos(Vector3 worldSpacePos)
+    {
+        this.worldSpacePos = worldSpacePos;
+    }
     public void SetTerrain(MapTerrain terrain)
     {
-        this.Terrain = terrain;
-    }
-    public List<Tile> GetNeighborTiles(Tile currentTiles)
-    {
-        var center = this.transform;
-
-        //top neighbour
-        return null;
+        this.terrain = terrain;
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -60,7 +69,7 @@ public class Tile : MonoBehaviour
         if (collision.gameObject.layer == 6)
         {
             
-            this.UnitObject = collision.gameObject;
+            this.unitObject = collision.gameObject;
             isOccuppied = true;
         }
 
@@ -68,7 +77,7 @@ public class Tile : MonoBehaviour
     }
     public void OnTriggerExit2D(Collider2D collision)
     {
-        this.UnitObject = null;
+        this.unitObject = null;
         isOccuppied = false;
     }
   

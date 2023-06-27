@@ -17,7 +17,8 @@ public class UnitStatus
     public float Speed { get => speed;}
     [SerializeField] float speed;
 
-    
+    public MapTerrain[] Walkable { get => walkable; }
+    [SerializeField]MapTerrain[] walkable = new MapTerrain[4];
 
     public int UnitSpeed
     {

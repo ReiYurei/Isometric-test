@@ -43,8 +43,8 @@ public class MapManager : MonoBehaviour
                         {
                             var tile = Instantiate(OverlayTilePrefab, OverlayContainer.transform);
                             var cellWorldPosition = Tilemaps[i].GetCellCenterWorld(tileLocation);
-                            tile.WorldSpacePos = cellWorldPosition;
-                            tile.TileKey = tileKey;
+                            tile.SetWorldPos(cellWorldPosition);
+                            tile.SetTileKey(tileKey);
                             tile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z + 1);
 
 

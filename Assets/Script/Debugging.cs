@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.InputSystem;
+
 
 public class Debugging : MonoBehaviour
 {
@@ -10,30 +12,59 @@ public class Debugging : MonoBehaviour
 
     public MouseController mouse;
     public List<Tilemap> tilemaps;
-    
 
+    public Tile startTile;
+    public Tile targetTile;
+
+
+    List<Tile> tilePath;
+    public List<Vector2Int> tileKey;
+    public List<Vector3> worldPos;
+
+
+    PathFinder pathfinder;
+    public InputActionAsset Actions;
     private void Start()
     {
-        int childCount = gameObject.transform.childCount;
-        for (int i = 0; i < childCount; i++)
-        {
-            var child = gameObject.transform.GetChild(i);
-            tilemaps.Add(child.GetComponent<Tilemap>());
-        }
+        pathfinder = new PathFinder();
+        Actions.FindActionMap("Debug").FindAction("Click").performed += OnClickDebugging;
+        Actions.FindActionMap("Debug").Enable();
     }
     void Update()
     {
-        if (GameManager.Instance.MapManager.Tiles.Count > 0)
+        if (Input.GetKeyDown(KeyCode.Y))
         {
-            coordinate = GameManager.Instance.MapManager.Tiles[0].transform.position;
+            var map = GameManager.Instance.MapManager.Tiles;
+            foreach (Tile tile in tilePath)
+            {
+                tile.HideTile();
+            }
         }
-        else if (GameManager.Instance.MapManager.Tiles.Count >= 1)
+    }
+    public void OnClickDebugging(InputAction.CallbackContext context)
+    {
+        var selection = GameManager.Instance.SelectionManager.SelectedInfo;
+        var target = GameManager.Instance.SelectionManager.SelectedInfo;
+        if (selection.StandingObject != null)
         {
-            coordinate = GameManager.Instance.MapManager.Tiles[1].transform.position;
+            startTile = selection.Tile;
+        }
+        else
+        {
+            targetTile = selection.Tile;
+        }
+        if (startTile != null && targetTile != null)
+        {
+            tilePath = pathfinder.FindPath(startTile ?? startTile, targetTile ?? targetTile);
+            foreach (Tile tile in tilePath)
+            {
+                tileKey.Add(tile.TileKey);
+                worldPos.Add(tile.WorldSpacePos);
+                tile.ShowTile();
+            }
         }
 
     }
-
 
 
 
