@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 public class PathFinder
 {
+
     public List<Tile> FindPath(Tile start, Tile target)
     {
         List<Tile> openList = new List<Tile>();
@@ -20,7 +21,7 @@ public class PathFinder
             {
                 return GetFinishedPath(start, target);
             }
-            var neighbourTiles = GetNeighbourTiles(currentTile);
+            var neighbourTiles = GetNeighbourTiles(currentTile, start, target);
 
             foreach (Tile neighbour in neighbourTiles)
             {
@@ -55,54 +56,135 @@ public class PathFinder
         return finishedPath;
     }
 
-  //  int GetDistance(Tile start, Tile neighbour)
-  //  {
-  //      return Mathf.Abs(start.TileKey.x - neighbour.TileKey.x) + Mathf.Abs(start.TileKey.y - neighbour.TileKey.y);
-  //  }
-    float GetDistance(Tile start, Tile neighbour)
+    int GetDistance(Tile start, Tile neighbour)
     {
-        return Mathf.Abs(start.WorldSpacePos.x - neighbour.WorldSpacePos.x) + Mathf.Abs(start.WorldSpacePos.y - neighbour.WorldSpacePos.y);
+        return Mathf.Abs(start.TileKey.x - neighbour.TileKey.x) + Mathf.Abs(start.TileKey.y - neighbour.TileKey.y);
     }
+   // float GetDistance(Tile start, Tile neighbour)
+   // {
+   //     return Mathf.Abs(start.WorldSpacePos.x - neighbour.WorldSpacePos.x) + Mathf.Abs(start.WorldSpacePos.y - neighbour.WorldSpacePos.y);
+   // }
 
-    public List<Tile> GetNeighbourTiles(Tile tile)
+    List<Tile> GetNeighbourTiles(Tile tile, Tile start, Tile target)
     {
         var map = GameManager.Instance.MapManager.map;
-
+        var x = Mathf.Abs(start.TileKey.x - target.TileKey.x);
+        var y = Mathf.Abs(start.TileKey.y - target.TileKey.y);
+        
         List<Tile> neighbours = new List<Tile>();
 
-
-        //TOP
-        Vector2Int tilekey = new Vector2Int(tile.TileKey.x, tile.TileKey.y +1);
-
-        if (map.ContainsKey(tilekey))
+        if (x < y)
         {
-            neighbours.Add(map[tilekey]);
+            GetLeft();
+            GetRight();
+            GetTop();
+            GetBottom();
+            
+        }
+        else if (x > y)
+        {
+            GetTop();
+            GetBottom();
+            GetLeft();
+            GetRight();
+        }
+        else
+        {
+            GetLeft();
+            GetRight();
+            GetTop();
+            GetBottom();
         }
 
-        //Bottom
-        tilekey = new Vector2Int(tile.TileKey.x, tile.TileKey.y - 1);
-
-        if (map.ContainsKey(tilekey))
+        void GetTop()
         {
-            neighbours.Add(map[tilekey]);
-        }
-
-        //Left
-        tilekey = new Vector2Int(tile.TileKey.x-1, tile.TileKey.y);
-
-        if (map.ContainsKey(tilekey))
-        {
-            neighbours.Add(map[tilekey]);
+            Vector2Int tilekey = new Vector2Int(tile.TileKey.x, tile.TileKey.y + 1);
+            if (map.ContainsKey(tilekey))
+            {
+                neighbours.Add(map[tilekey]);
+            }
         }
 
 
-        //Right
-        tilekey = new Vector2Int(tile.TileKey.x+1, tile.TileKey.y);
 
-        if (map.ContainsKey(tilekey))
+        void GetBottom()
         {
-            neighbours.Add(map[tilekey]);
+          
+            Vector2Int tilekey = new Vector2Int(tile.TileKey.x, tile.TileKey.y - 1);
+
+            if (map.ContainsKey(tilekey))
+            {
+                neighbours.Add(map[tilekey]);
+            }
+
+        }
+
+        void GetLeft()
+        {
+            //Left
+            Vector2Int tilekey = new Vector2Int(tile.TileKey.x - 1, tile.TileKey.y);
+
+            if (map.ContainsKey(tilekey))
+            {
+                neighbours.Add(map[tilekey]);
+            }
+        }
+        
+
+        void GetRight()
+        {
+            //Right
+            Vector2Int tilekey = new Vector2Int(tile.TileKey.x + 1, tile.TileKey.y);
+
+            if (map.ContainsKey(tilekey))
+            {
+                neighbours.Add(map[tilekey]);
+            }
+            
         }
         return neighbours;
+    }
+    public List<Tile> InRange(float range, Tile start)
+    {
+
+        var map = GameManager.Instance.MapManager.map;
+
+        List<Tile> inRangeTiles = new List<Tile>();
+
+        //int numPoints = 8;
+        
+        float radiusX = range * 0.75f;       
+        float radiusY = radiusX * 0.5f;
+
+        Vector2Int center = new Vector2Int(start.TileKey.x, start.TileKey.y);
+        int topBound = (int)center.y + (int)range;
+        int bottomBound = (int)center.y - (int)range;
+        int leftBound = (int)center.x - (int)range;
+        int rightBound = (int)center.x + (int)range;
+
+        
+        for (int y = bottomBound; y <= topBound; y++)
+        {
+            for (int x = leftBound; x <= rightBound; x++)
+            {
+                var tile = new Vector2Int(x, y);
+                if (inRange(center, tile, range) && map.ContainsKey(tile))
+                {                 
+                        inRangeTiles.Add(map[tile]);
+                        Debug.Log($"{tile}");                   
+                }
+                
+            }
+        }
+
+        bool inRange(Vector2Int center, Vector2Int tile, float range)
+        {
+            float dx = center.x - tile.x;
+            float dy = center.y - tile.y;
+            float distance = dx * dx + dy * dy;
+
+            return distance <= range * range;
+        }
+        return inRangeTiles;
     }
 }

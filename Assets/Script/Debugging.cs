@@ -7,22 +7,24 @@ using UnityEngine.InputSystem;
 
 public class Debugging : MonoBehaviour
 {
-
+    [Header("Range Finder")]
+    public float range;
     public Vector3 coordinate;
 
-    public MouseController mouse;
     public List<Tilemap> tilemaps;
 
+    [Header("Tiles")]
     public Tile startTile;
     public Tile targetTile;
 
-
+    
     List<Tile> tilePath;
     public List<Vector2Int> tileKey;
     public List<Vector3> worldPos;
 
 
     PathFinder pathfinder;
+    [Header("Input")]
     public InputActionAsset Actions;
     private void Start()
     {
@@ -34,10 +36,21 @@ public class Debugging : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            var map = GameManager.Instance.MapManager.Tiles;
-            foreach (Tile tile in tilePath)
+            var selection = GameManager.Instance.SelectionManager.SelectedInfo;
+            var RangePath = pathfinder.InRange(range, selection.Tile);
+
+            foreach (Tile tile in RangePath)
             {
                 tile.HideTile();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            var selection = GameManager.Instance.SelectionManager.SelectedInfo;
+            var RangePath = pathfinder.InRange(range, selection.Tile);
+            foreach (Tile tile in RangePath)
+            {
+                tile.ShowTile();
             }
         }
     }
@@ -70,10 +83,10 @@ public class Debugging : MonoBehaviour
 
 
     public int numPoints;
-    public float RadiusX;
+    
     public float radiusX
     {
-        get { return RadiusX * 0.75f; }
+        get { return range * 0.75f; }
     }
     public float RadiusY
     {
@@ -82,12 +95,18 @@ public class Debugging : MonoBehaviour
     float radiusY;
     private void OnDrawGizmos()
     {
-        radiusY = RadiusY;
+        
+        if (GameManager.Instance != null)
+        {
+            Vector3 selection;
+            radiusY = RadiusY;
 
-        Vector3 center = new Vector3(coordinate.x, coordinate.y, coordinate.z);
+            var coordinate = GameManager.Instance.SelectionManager.SelectedInfo.WorldSpacePos;
+            selection = new Vector3(coordinate.x, coordinate.y, coordinate.z);
+            Vector3 center = new Vector3(selection.x, selection.y, selection.z);
 
 
-            
+
             Gizmos.color = Color.red;
             float angleIncrement = 2f * Mathf.PI / numPoints;
 
@@ -101,6 +120,9 @@ public class Debugging : MonoBehaviour
                 Gizmos.DrawLine(prevPoint, nextPoint);
                 prevPoint = nextPoint;
             }
+        }
+        
+        
        
         
     }
