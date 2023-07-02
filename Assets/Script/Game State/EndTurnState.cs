@@ -1,24 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class BattleBeginState : GameBaseState
+﻿public class EndTurnState : GameBaseState
 {
     public override void EnterState(StateManager state)
     {
-        state.turnCount++;
         state.OnChangeState();
         state.YieldExit(1);
-
 
     }
 
     public override void ExitState(StateManager state)
     {
-        state.SetState(state.EnemyTurnState);
+
     }
 
     public override void UpdateState(StateManager state)
     {
+
     }
 }

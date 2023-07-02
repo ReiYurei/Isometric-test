@@ -8,7 +8,7 @@ public class TextShown : MonoBehaviour
 {
 
     TextMeshProUGUI textComponent;
-    void Start()
+    void Update()
     {
         var turnCount = GameManager.Instance.StateManager.turnCount;
 

@@ -10,9 +10,9 @@ public class MouseController : MonoBehaviour
     Vector3 mousePos;
     Vector2 mousePos2d;
 
-    private InputActionAsset actions;
+    InputActionAsset actions;
 
-    private void Awake()
+    private void OnEnable()
     {
         actions = GameManager.Instance.InputManager.Actions;
         actions.FindActionMap("Player Turn").FindAction("Click").performed += OnClick;
@@ -34,7 +34,6 @@ public class MouseController : MonoBehaviour
         {
             var tile = hoveredTile.Value.collider.gameObject;
             transform.position = tile.transform.position;
-            GameManager.Instance.SelectionManager.OnHoverInfo(tile.GetComponent<Tile>());
         }
     }
 
@@ -49,11 +48,11 @@ public class MouseController : MonoBehaviour
                 GameManager.Instance.MapManager.Tiles.Add(tile);
                 GameManager.Instance.MapManager.Tiles[0].ShowTile();
                 GameManager.Instance.SelectionManager.OnSelectInfo(tile, tile.UnitObject, tile.TileKey, tile.WorldSpacePos);
-                
-                
 
 
-            }        
+
+
+            }
             else
             {
                 GameManager.Instance.MapManager.Tiles[0].HideTile();
@@ -77,26 +76,9 @@ public class MouseController : MonoBehaviour
         }
         return null;
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnDisable()
     {
-        if (collision.gameObject.tag == "Unit")
-        {
-            GetGameObject(collision.gameObject);
-        }
-;
+        actions.FindActionMap("Player Turn").FindAction("Click").performed -= OnClick;
     }
-
-    GameObject GetGameObject(GameObject standingObject)
-    {
-        return standingObject;
-    }
-    // void OnEnable()
-    // {
-    //     actions.FindActionMap("Player Turn Input").Enable();
-    // }
-    // void OnDisable()
-    // {
-    //     actions.FindActionMap("Player Turn Input").Disable();
-    // }
+    
 }

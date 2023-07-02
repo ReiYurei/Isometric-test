@@ -22,8 +22,12 @@ public class InputManager : MonoBehaviour
     }
     void OnCancel(InputAction.CallbackContext context)
     {
+        Actions.FindAction("Back").performed -= OnCancel;
         var state = GameManager.Instance.StateManager;
-        state.SetState(state.previousState);
+        state.SetState(state.PlayerActionState);
+        
+       
+
     }
     void OnStateChangeHandler(GameBaseState state)
     {
@@ -47,7 +51,6 @@ public class InputManager : MonoBehaviour
 
                 break;
             case PlayerActionState:
-                Actions.FindAction("Back").performed -= OnCancel;
                 Actions.FindActionMap("Player Turn").Enable();
                 Actions.FindActionMap("Action UI").Enable();
                 break;
@@ -55,6 +58,16 @@ public class InputManager : MonoBehaviour
                 Actions.FindActionMap("Player Turn").Disable();
                 Actions.FindActionMap("Action UI").Enable();
                 Actions.FindAction("Back").performed += OnCancel;
+                break;
+            case SelectingTargetState:
+                Actions.FindActionMap("Player Turn").FindAction("Click").Disable();
+                Actions.FindActionMap("Player Turn").FindAction("MousePos").Enable();
+                Actions.FindActionMap("Action UI").Enable();
+                Actions.FindAction("Back").performed += OnCancel;
+                break;
+            case EndTurnState:
+                Actions.FindActionMap("Player Turn").Disable();
+                Actions.FindActionMap("Action UI").Disable();
                 break;
         }
     }

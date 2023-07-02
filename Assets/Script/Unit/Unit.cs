@@ -7,10 +7,24 @@ using System.Linq;
 public class Unit : MonoBehaviour, IInteractable, IDamageable
 {
     [SerializeField] public UnitStatus status;
+    void OnEnable()
+    {
+        var uid = status.UID;
+        UnitManager.UnitInScene.Add(uid, this.gameObject);
+        Debug.Log(UnitManager.UnitInScene[uid]);
+    }
+    void OnDisable()
+    {
+        var uid = status.UID;
+        if (UnitManager.UnitInScene.ContainsKey(uid))
+        {
+            UnitManager.UnitInScene.Remove(uid);
+        }
+    }
     void Start()
     {
         status.HealthPoint = status.MaxHP;
-        Debug.Log($"{gameObject.name}'s Speed = {status.UnitSpeed}");
+        Debug.Log($"{gameObject.name}'s Speed = {status.TrueUnitSpeed}");
     }
     
     public void Interact()

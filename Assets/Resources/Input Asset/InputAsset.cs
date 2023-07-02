@@ -24,9 +24,18 @@ public partial class @InputAsset : IInputActionCollection2, IDisposable
     ""name"": ""InputAsset"",
     ""maps"": [
         {
-            ""name"": ""Player Turn Input"",
+            ""name"": ""Player Turn"",
             ""id"": ""e717d96b-afc9-4444-9185-502237350a32"",
             ""actions"": [
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""2e24f917-eb8d-4cbb-a77e-573ba2c83bf9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
                 {
                     ""name"": ""Confirm"",
                     ""type"": ""Button"",
@@ -62,6 +71,15 @@ public partial class @InputAsset : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MousePos"",
+                    ""type"": ""Value"",
+                    ""id"": ""c6752bb5-1f93-47ed-a4bd-bcb7080d904b"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -130,11 +148,33 @@ public partial class @InputAsset : IInputActionCollection2, IDisposable
                     ""action"": ""Prev Character"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""edd01289-31e5-4822-85b9-a00a8e5cb36c"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""M&K"",
+                    ""action"": ""MousePos"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ed0f485-f8c8-48d3-9447-3e78617c1d2f"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""M&K"",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
         {
-            ""name"": ""UI"",
+            ""name"": ""Menu UI"",
             ""id"": ""2ff53f72-7a0b-4a6c-a17a-6077fa872f90"",
             ""actions"": [
                 {
@@ -339,6 +379,272 @@ public partial class @InputAsset : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Action UI"",
+            ""id"": ""a98286f5-2837-48cb-bcff-3a278e36eb04"",
+            ""actions"": [
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""6a60d6ee-d555-436d-95c7-a3f15eae4ac1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Navigation"",
+                    ""type"": ""Button"",
+                    ""id"": ""dcbf9588-05b5-4328-ba46-bac2400cc7b2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Confirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""e01090bb-5c4a-40a2-8060-241ff5728df5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Back"",
+                    ""type"": ""Button"",
+                    ""id"": ""ca40f327-b6bf-49f1-aa7e-0ca271d043d1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Navigation_2"",
+                    ""type"": ""Value"",
+                    ""id"": ""188c7cc6-88bc-4efa-a69b-797d7ba7bc1b"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Point"",
+                    ""type"": ""Value"",
+                    ""id"": ""8fdb4004-846c-40e2-ae67-195b758d6bd0"",
+                    ""expectedControlType"": ""Vector3"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""a37635f5-f6e0-4bbd-891b-34ac65d33527"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""M&K"",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc8b006a-22eb-4d43-a713-514d683976e4"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""M&K"",
+                    ""action"": ""Navigation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0ef4b702-0f34-4f95-9b8c-77e5576c03c3"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""M&K"",
+                    ""action"": ""Navigation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d0060e5b-e09e-4a76-bf43-dfff4c686ab0"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""M&K"",
+                    ""action"": ""Navigation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f8bb4d71-485c-423e-99f1-680f03d7a025"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""M&K"",
+                    ""action"": ""Navigation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d87b817-832a-4958-9c8f-6bbe8b8e2e0d"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""M&K"",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ec46f173-ec8d-42c7-ae18-6399f127ccef"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""M&K"",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""748ab9bf-b3fe-4434-bd13-e4d5e4f30087"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""M&K"",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a87fdeb0-1955-44cd-9c9e-47c83879a195"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""M&K"",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9490c9e5-7f05-4b57-9914-da1c0f177a5d"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""M&K"",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""8988bb88-19df-4fa7-a418-24ea46498c25"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigation_2"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""af1f9c86-f3e8-4bf8-b59a-048431974152"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""M&K"",
+                    ""action"": ""Navigation_2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""8d3cb3fb-26d7-4a21-983a-ef42db3fc946"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""M&K"",
+                    ""action"": ""Navigation_2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""5a50c4ce-36de-48bb-8345-b33f21a4a343"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""M&K"",
+                    ""action"": ""Navigation_2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""31e3fbc9-5890-467c-b2c8-816c866e10a6"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""M&K"",
+                    ""action"": ""Navigation_2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b190c143-4d2d-4e38-badf-b610d51cb2d0"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""M&K"",
+                    ""action"": ""Point"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""e2cb5e36-c349-42d1-88e7-dbd9da6d8438"",
+            ""actions"": [
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""ce21e626-3e3b-4e77-83aa-09e6a6a1837c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""78599f89-6d2b-4f68-ac25-4fc1f3fdfc81"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""M&K"",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -360,19 +666,32 @@ public partial class @InputAsset : IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // Player Turn Input
-        m_PlayerTurnInput = asset.FindActionMap("Player Turn Input", throwIfNotFound: true);
-        m_PlayerTurnInput_Confirm = m_PlayerTurnInput.FindAction("Confirm", throwIfNotFound: true);
-        m_PlayerTurnInput_Back = m_PlayerTurnInput.FindAction("Back", throwIfNotFound: true);
-        m_PlayerTurnInput_NextCharacter = m_PlayerTurnInput.FindAction("Next Character", throwIfNotFound: true);
-        m_PlayerTurnInput_PrevCharacter = m_PlayerTurnInput.FindAction("Prev Character", throwIfNotFound: true);
-        // UI
-        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
-        m_UI_Navigation = m_UI.FindAction("Navigation", throwIfNotFound: true);
-        m_UI_Confirm = m_UI.FindAction("Confirm", throwIfNotFound: true);
-        m_UI_Back = m_UI.FindAction("Back", throwIfNotFound: true);
-        m_UI_Navigation_2 = m_UI.FindAction("Navigation_2", throwIfNotFound: true);
+        // Player Turn
+        m_PlayerTurn = asset.FindActionMap("Player Turn", throwIfNotFound: true);
+        m_PlayerTurn_Click = m_PlayerTurn.FindAction("Click", throwIfNotFound: true);
+        m_PlayerTurn_Confirm = m_PlayerTurn.FindAction("Confirm", throwIfNotFound: true);
+        m_PlayerTurn_Back = m_PlayerTurn.FindAction("Back", throwIfNotFound: true);
+        m_PlayerTurn_NextCharacter = m_PlayerTurn.FindAction("Next Character", throwIfNotFound: true);
+        m_PlayerTurn_PrevCharacter = m_PlayerTurn.FindAction("Prev Character", throwIfNotFound: true);
+        m_PlayerTurn_MousePos = m_PlayerTurn.FindAction("MousePos", throwIfNotFound: true);
+        // Menu UI
+        m_MenuUI = asset.FindActionMap("Menu UI", throwIfNotFound: true);
+        m_MenuUI_Click = m_MenuUI.FindAction("Click", throwIfNotFound: true);
+        m_MenuUI_Navigation = m_MenuUI.FindAction("Navigation", throwIfNotFound: true);
+        m_MenuUI_Confirm = m_MenuUI.FindAction("Confirm", throwIfNotFound: true);
+        m_MenuUI_Back = m_MenuUI.FindAction("Back", throwIfNotFound: true);
+        m_MenuUI_Navigation_2 = m_MenuUI.FindAction("Navigation_2", throwIfNotFound: true);
+        // Action UI
+        m_ActionUI = asset.FindActionMap("Action UI", throwIfNotFound: true);
+        m_ActionUI_Click = m_ActionUI.FindAction("Click", throwIfNotFound: true);
+        m_ActionUI_Navigation = m_ActionUI.FindAction("Navigation", throwIfNotFound: true);
+        m_ActionUI_Confirm = m_ActionUI.FindAction("Confirm", throwIfNotFound: true);
+        m_ActionUI_Back = m_ActionUI.FindAction("Back", throwIfNotFound: true);
+        m_ActionUI_Navigation_2 = m_ActionUI.FindAction("Navigation_2", throwIfNotFound: true);
+        m_ActionUI_Point = m_ActionUI.FindAction("Point", throwIfNotFound: true);
+        // Debug
+        m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+        m_Debug_Click = m_Debug.FindAction("Click", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -429,46 +748,59 @@ public partial class @InputAsset : IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Player Turn Input
-    private readonly InputActionMap m_PlayerTurnInput;
-    private IPlayerTurnInputActions m_PlayerTurnInputActionsCallbackInterface;
-    private readonly InputAction m_PlayerTurnInput_Confirm;
-    private readonly InputAction m_PlayerTurnInput_Back;
-    private readonly InputAction m_PlayerTurnInput_NextCharacter;
-    private readonly InputAction m_PlayerTurnInput_PrevCharacter;
-    public struct PlayerTurnInputActions
+    // Player Turn
+    private readonly InputActionMap m_PlayerTurn;
+    private IPlayerTurnActions m_PlayerTurnActionsCallbackInterface;
+    private readonly InputAction m_PlayerTurn_Click;
+    private readonly InputAction m_PlayerTurn_Confirm;
+    private readonly InputAction m_PlayerTurn_Back;
+    private readonly InputAction m_PlayerTurn_NextCharacter;
+    private readonly InputAction m_PlayerTurn_PrevCharacter;
+    private readonly InputAction m_PlayerTurn_MousePos;
+    public struct PlayerTurnActions
     {
         private @InputAsset m_Wrapper;
-        public PlayerTurnInputActions(@InputAsset wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Confirm => m_Wrapper.m_PlayerTurnInput_Confirm;
-        public InputAction @Back => m_Wrapper.m_PlayerTurnInput_Back;
-        public InputAction @NextCharacter => m_Wrapper.m_PlayerTurnInput_NextCharacter;
-        public InputAction @PrevCharacter => m_Wrapper.m_PlayerTurnInput_PrevCharacter;
-        public InputActionMap Get() { return m_Wrapper.m_PlayerTurnInput; }
+        public PlayerTurnActions(@InputAsset wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Click => m_Wrapper.m_PlayerTurn_Click;
+        public InputAction @Confirm => m_Wrapper.m_PlayerTurn_Confirm;
+        public InputAction @Back => m_Wrapper.m_PlayerTurn_Back;
+        public InputAction @NextCharacter => m_Wrapper.m_PlayerTurn_NextCharacter;
+        public InputAction @PrevCharacter => m_Wrapper.m_PlayerTurn_PrevCharacter;
+        public InputAction @MousePos => m_Wrapper.m_PlayerTurn_MousePos;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerTurn; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerTurnInputActions set) { return set.Get(); }
-        public void SetCallbacks(IPlayerTurnInputActions instance)
+        public static implicit operator InputActionMap(PlayerTurnActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerTurnActions instance)
         {
-            if (m_Wrapper.m_PlayerTurnInputActionsCallbackInterface != null)
+            if (m_Wrapper.m_PlayerTurnActionsCallbackInterface != null)
             {
-                @Confirm.started -= m_Wrapper.m_PlayerTurnInputActionsCallbackInterface.OnConfirm;
-                @Confirm.performed -= m_Wrapper.m_PlayerTurnInputActionsCallbackInterface.OnConfirm;
-                @Confirm.canceled -= m_Wrapper.m_PlayerTurnInputActionsCallbackInterface.OnConfirm;
-                @Back.started -= m_Wrapper.m_PlayerTurnInputActionsCallbackInterface.OnBack;
-                @Back.performed -= m_Wrapper.m_PlayerTurnInputActionsCallbackInterface.OnBack;
-                @Back.canceled -= m_Wrapper.m_PlayerTurnInputActionsCallbackInterface.OnBack;
-                @NextCharacter.started -= m_Wrapper.m_PlayerTurnInputActionsCallbackInterface.OnNextCharacter;
-                @NextCharacter.performed -= m_Wrapper.m_PlayerTurnInputActionsCallbackInterface.OnNextCharacter;
-                @NextCharacter.canceled -= m_Wrapper.m_PlayerTurnInputActionsCallbackInterface.OnNextCharacter;
-                @PrevCharacter.started -= m_Wrapper.m_PlayerTurnInputActionsCallbackInterface.OnPrevCharacter;
-                @PrevCharacter.performed -= m_Wrapper.m_PlayerTurnInputActionsCallbackInterface.OnPrevCharacter;
-                @PrevCharacter.canceled -= m_Wrapper.m_PlayerTurnInputActionsCallbackInterface.OnPrevCharacter;
+                @Click.started -= m_Wrapper.m_PlayerTurnActionsCallbackInterface.OnClick;
+                @Click.performed -= m_Wrapper.m_PlayerTurnActionsCallbackInterface.OnClick;
+                @Click.canceled -= m_Wrapper.m_PlayerTurnActionsCallbackInterface.OnClick;
+                @Confirm.started -= m_Wrapper.m_PlayerTurnActionsCallbackInterface.OnConfirm;
+                @Confirm.performed -= m_Wrapper.m_PlayerTurnActionsCallbackInterface.OnConfirm;
+                @Confirm.canceled -= m_Wrapper.m_PlayerTurnActionsCallbackInterface.OnConfirm;
+                @Back.started -= m_Wrapper.m_PlayerTurnActionsCallbackInterface.OnBack;
+                @Back.performed -= m_Wrapper.m_PlayerTurnActionsCallbackInterface.OnBack;
+                @Back.canceled -= m_Wrapper.m_PlayerTurnActionsCallbackInterface.OnBack;
+                @NextCharacter.started -= m_Wrapper.m_PlayerTurnActionsCallbackInterface.OnNextCharacter;
+                @NextCharacter.performed -= m_Wrapper.m_PlayerTurnActionsCallbackInterface.OnNextCharacter;
+                @NextCharacter.canceled -= m_Wrapper.m_PlayerTurnActionsCallbackInterface.OnNextCharacter;
+                @PrevCharacter.started -= m_Wrapper.m_PlayerTurnActionsCallbackInterface.OnPrevCharacter;
+                @PrevCharacter.performed -= m_Wrapper.m_PlayerTurnActionsCallbackInterface.OnPrevCharacter;
+                @PrevCharacter.canceled -= m_Wrapper.m_PlayerTurnActionsCallbackInterface.OnPrevCharacter;
+                @MousePos.started -= m_Wrapper.m_PlayerTurnActionsCallbackInterface.OnMousePos;
+                @MousePos.performed -= m_Wrapper.m_PlayerTurnActionsCallbackInterface.OnMousePos;
+                @MousePos.canceled -= m_Wrapper.m_PlayerTurnActionsCallbackInterface.OnMousePos;
             }
-            m_Wrapper.m_PlayerTurnInputActionsCallbackInterface = instance;
+            m_Wrapper.m_PlayerTurnActionsCallbackInterface = instance;
             if (instance != null)
             {
+                @Click.started += instance.OnClick;
+                @Click.performed += instance.OnClick;
+                @Click.canceled += instance.OnClick;
                 @Confirm.started += instance.OnConfirm;
                 @Confirm.performed += instance.OnConfirm;
                 @Confirm.canceled += instance.OnConfirm;
@@ -481,54 +813,57 @@ public partial class @InputAsset : IInputActionCollection2, IDisposable
                 @PrevCharacter.started += instance.OnPrevCharacter;
                 @PrevCharacter.performed += instance.OnPrevCharacter;
                 @PrevCharacter.canceled += instance.OnPrevCharacter;
+                @MousePos.started += instance.OnMousePos;
+                @MousePos.performed += instance.OnMousePos;
+                @MousePos.canceled += instance.OnMousePos;
             }
         }
     }
-    public PlayerTurnInputActions @PlayerTurnInput => new PlayerTurnInputActions(this);
+    public PlayerTurnActions @PlayerTurn => new PlayerTurnActions(this);
 
-    // UI
-    private readonly InputActionMap m_UI;
-    private IUIActions m_UIActionsCallbackInterface;
-    private readonly InputAction m_UI_Click;
-    private readonly InputAction m_UI_Navigation;
-    private readonly InputAction m_UI_Confirm;
-    private readonly InputAction m_UI_Back;
-    private readonly InputAction m_UI_Navigation_2;
-    public struct UIActions
+    // Menu UI
+    private readonly InputActionMap m_MenuUI;
+    private IMenuUIActions m_MenuUIActionsCallbackInterface;
+    private readonly InputAction m_MenuUI_Click;
+    private readonly InputAction m_MenuUI_Navigation;
+    private readonly InputAction m_MenuUI_Confirm;
+    private readonly InputAction m_MenuUI_Back;
+    private readonly InputAction m_MenuUI_Navigation_2;
+    public struct MenuUIActions
     {
         private @InputAsset m_Wrapper;
-        public UIActions(@InputAsset wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Click => m_Wrapper.m_UI_Click;
-        public InputAction @Navigation => m_Wrapper.m_UI_Navigation;
-        public InputAction @Confirm => m_Wrapper.m_UI_Confirm;
-        public InputAction @Back => m_Wrapper.m_UI_Back;
-        public InputAction @Navigation_2 => m_Wrapper.m_UI_Navigation_2;
-        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public MenuUIActions(@InputAsset wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Click => m_Wrapper.m_MenuUI_Click;
+        public InputAction @Navigation => m_Wrapper.m_MenuUI_Navigation;
+        public InputAction @Confirm => m_Wrapper.m_MenuUI_Confirm;
+        public InputAction @Back => m_Wrapper.m_MenuUI_Back;
+        public InputAction @Navigation_2 => m_Wrapper.m_MenuUI_Navigation_2;
+        public InputActionMap Get() { return m_Wrapper.m_MenuUI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
-        public void SetCallbacks(IUIActions instance)
+        public static implicit operator InputActionMap(MenuUIActions set) { return set.Get(); }
+        public void SetCallbacks(IMenuUIActions instance)
         {
-            if (m_Wrapper.m_UIActionsCallbackInterface != null)
+            if (m_Wrapper.m_MenuUIActionsCallbackInterface != null)
             {
-                @Click.started -= m_Wrapper.m_UIActionsCallbackInterface.OnClick;
-                @Click.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnClick;
-                @Click.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnClick;
-                @Navigation.started -= m_Wrapper.m_UIActionsCallbackInterface.OnNavigation;
-                @Navigation.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnNavigation;
-                @Navigation.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnNavigation;
-                @Confirm.started -= m_Wrapper.m_UIActionsCallbackInterface.OnConfirm;
-                @Confirm.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnConfirm;
-                @Confirm.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnConfirm;
-                @Back.started -= m_Wrapper.m_UIActionsCallbackInterface.OnBack;
-                @Back.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnBack;
-                @Back.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnBack;
-                @Navigation_2.started -= m_Wrapper.m_UIActionsCallbackInterface.OnNavigation_2;
-                @Navigation_2.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnNavigation_2;
-                @Navigation_2.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnNavigation_2;
+                @Click.started -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnClick;
+                @Click.performed -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnClick;
+                @Click.canceled -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnClick;
+                @Navigation.started -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnNavigation;
+                @Navigation.performed -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnNavigation;
+                @Navigation.canceled -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnNavigation;
+                @Confirm.started -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnConfirm;
+                @Confirm.performed -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnConfirm;
+                @Confirm.canceled -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnConfirm;
+                @Back.started -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnBack;
+                @Back.performed -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnBack;
+                @Back.canceled -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnBack;
+                @Navigation_2.started -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnNavigation_2;
+                @Navigation_2.performed -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnNavigation_2;
+                @Navigation_2.canceled -= m_Wrapper.m_MenuUIActionsCallbackInterface.OnNavigation_2;
             }
-            m_Wrapper.m_UIActionsCallbackInterface = instance;
+            m_Wrapper.m_MenuUIActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Click.started += instance.OnClick;
@@ -549,7 +884,113 @@ public partial class @InputAsset : IInputActionCollection2, IDisposable
             }
         }
     }
-    public UIActions @UI => new UIActions(this);
+    public MenuUIActions @MenuUI => new MenuUIActions(this);
+
+    // Action UI
+    private readonly InputActionMap m_ActionUI;
+    private IActionUIActions m_ActionUIActionsCallbackInterface;
+    private readonly InputAction m_ActionUI_Click;
+    private readonly InputAction m_ActionUI_Navigation;
+    private readonly InputAction m_ActionUI_Confirm;
+    private readonly InputAction m_ActionUI_Back;
+    private readonly InputAction m_ActionUI_Navigation_2;
+    private readonly InputAction m_ActionUI_Point;
+    public struct ActionUIActions
+    {
+        private @InputAsset m_Wrapper;
+        public ActionUIActions(@InputAsset wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Click => m_Wrapper.m_ActionUI_Click;
+        public InputAction @Navigation => m_Wrapper.m_ActionUI_Navigation;
+        public InputAction @Confirm => m_Wrapper.m_ActionUI_Confirm;
+        public InputAction @Back => m_Wrapper.m_ActionUI_Back;
+        public InputAction @Navigation_2 => m_Wrapper.m_ActionUI_Navigation_2;
+        public InputAction @Point => m_Wrapper.m_ActionUI_Point;
+        public InputActionMap Get() { return m_Wrapper.m_ActionUI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ActionUIActions set) { return set.Get(); }
+        public void SetCallbacks(IActionUIActions instance)
+        {
+            if (m_Wrapper.m_ActionUIActionsCallbackInterface != null)
+            {
+                @Click.started -= m_Wrapper.m_ActionUIActionsCallbackInterface.OnClick;
+                @Click.performed -= m_Wrapper.m_ActionUIActionsCallbackInterface.OnClick;
+                @Click.canceled -= m_Wrapper.m_ActionUIActionsCallbackInterface.OnClick;
+                @Navigation.started -= m_Wrapper.m_ActionUIActionsCallbackInterface.OnNavigation;
+                @Navigation.performed -= m_Wrapper.m_ActionUIActionsCallbackInterface.OnNavigation;
+                @Navigation.canceled -= m_Wrapper.m_ActionUIActionsCallbackInterface.OnNavigation;
+                @Confirm.started -= m_Wrapper.m_ActionUIActionsCallbackInterface.OnConfirm;
+                @Confirm.performed -= m_Wrapper.m_ActionUIActionsCallbackInterface.OnConfirm;
+                @Confirm.canceled -= m_Wrapper.m_ActionUIActionsCallbackInterface.OnConfirm;
+                @Back.started -= m_Wrapper.m_ActionUIActionsCallbackInterface.OnBack;
+                @Back.performed -= m_Wrapper.m_ActionUIActionsCallbackInterface.OnBack;
+                @Back.canceled -= m_Wrapper.m_ActionUIActionsCallbackInterface.OnBack;
+                @Navigation_2.started -= m_Wrapper.m_ActionUIActionsCallbackInterface.OnNavigation_2;
+                @Navigation_2.performed -= m_Wrapper.m_ActionUIActionsCallbackInterface.OnNavigation_2;
+                @Navigation_2.canceled -= m_Wrapper.m_ActionUIActionsCallbackInterface.OnNavigation_2;
+                @Point.started -= m_Wrapper.m_ActionUIActionsCallbackInterface.OnPoint;
+                @Point.performed -= m_Wrapper.m_ActionUIActionsCallbackInterface.OnPoint;
+                @Point.canceled -= m_Wrapper.m_ActionUIActionsCallbackInterface.OnPoint;
+            }
+            m_Wrapper.m_ActionUIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Click.started += instance.OnClick;
+                @Click.performed += instance.OnClick;
+                @Click.canceled += instance.OnClick;
+                @Navigation.started += instance.OnNavigation;
+                @Navigation.performed += instance.OnNavigation;
+                @Navigation.canceled += instance.OnNavigation;
+                @Confirm.started += instance.OnConfirm;
+                @Confirm.performed += instance.OnConfirm;
+                @Confirm.canceled += instance.OnConfirm;
+                @Back.started += instance.OnBack;
+                @Back.performed += instance.OnBack;
+                @Back.canceled += instance.OnBack;
+                @Navigation_2.started += instance.OnNavigation_2;
+                @Navigation_2.performed += instance.OnNavigation_2;
+                @Navigation_2.canceled += instance.OnNavigation_2;
+                @Point.started += instance.OnPoint;
+                @Point.performed += instance.OnPoint;
+                @Point.canceled += instance.OnPoint;
+            }
+        }
+    }
+    public ActionUIActions @ActionUI => new ActionUIActions(this);
+
+    // Debug
+    private readonly InputActionMap m_Debug;
+    private IDebugActions m_DebugActionsCallbackInterface;
+    private readonly InputAction m_Debug_Click;
+    public struct DebugActions
+    {
+        private @InputAsset m_Wrapper;
+        public DebugActions(@InputAsset wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Click => m_Wrapper.m_Debug_Click;
+        public InputActionMap Get() { return m_Wrapper.m_Debug; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+        public void SetCallbacks(IDebugActions instance)
+        {
+            if (m_Wrapper.m_DebugActionsCallbackInterface != null)
+            {
+                @Click.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnClick;
+                @Click.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnClick;
+                @Click.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnClick;
+            }
+            m_Wrapper.m_DebugActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Click.started += instance.OnClick;
+                @Click.performed += instance.OnClick;
+                @Click.canceled += instance.OnClick;
+            }
+        }
+    }
+    public DebugActions @Debug => new DebugActions(this);
     private int m_MKSchemeIndex = -1;
     public InputControlScheme MKScheme
     {
@@ -559,19 +1000,34 @@ public partial class @InputAsset : IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_MKSchemeIndex];
         }
     }
-    public interface IPlayerTurnInputActions
+    public interface IPlayerTurnActions
     {
+        void OnClick(InputAction.CallbackContext context);
         void OnConfirm(InputAction.CallbackContext context);
         void OnBack(InputAction.CallbackContext context);
         void OnNextCharacter(InputAction.CallbackContext context);
         void OnPrevCharacter(InputAction.CallbackContext context);
+        void OnMousePos(InputAction.CallbackContext context);
     }
-    public interface IUIActions
+    public interface IMenuUIActions
     {
         void OnClick(InputAction.CallbackContext context);
         void OnNavigation(InputAction.CallbackContext context);
         void OnConfirm(InputAction.CallbackContext context);
         void OnBack(InputAction.CallbackContext context);
         void OnNavigation_2(InputAction.CallbackContext context);
+    }
+    public interface IActionUIActions
+    {
+        void OnClick(InputAction.CallbackContext context);
+        void OnNavigation(InputAction.CallbackContext context);
+        void OnConfirm(InputAction.CallbackContext context);
+        void OnBack(InputAction.CallbackContext context);
+        void OnNavigation_2(InputAction.CallbackContext context);
+        void OnPoint(InputAction.CallbackContext context);
+    }
+    public interface IDebugActions
+    {
+        void OnClick(InputAction.CallbackContext context);
     }
 }

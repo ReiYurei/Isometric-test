@@ -19,10 +19,13 @@ public class StateManager : MonoBehaviour
     public EnemyTurnState EnemyTurnState = new EnemyTurnState();
     public PlayerActionState PlayerActionState = new PlayerActionState();
     public ActionUIState UIState = new ActionUIState();
-    
+    public EndTurnState EndTurnState = new EndTurnState();
+    public SelectingTargetState SelectingTargetState = new SelectingTargetState();
+
+
     private void OnEnable()
     {
-        turnCount = 1;
+        turnCount = 0;
     }
     private void Start()
     {
@@ -38,6 +41,7 @@ public class StateManager : MonoBehaviour
   
     public void SetState(GameBaseState state)
     {
+
         previousState = currentState;
         currentState = state;
         currentState.EnterState(this);

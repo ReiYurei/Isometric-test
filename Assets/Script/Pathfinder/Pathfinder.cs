@@ -5,7 +5,7 @@ using System.Linq;
 public class PathFinder
 {
 
-    public List<Tile> FindPath(Tile start, Tile target)
+    public List<Tile> FindPath(Tile start, Tile target, Dictionary<Vector2Int,Tile> bound)
     {
         List<Tile> openList = new List<Tile>();
         List<Tile> closedList = new List<Tile>();
@@ -21,7 +21,8 @@ public class PathFinder
             {
                 return GetFinishedPath(start, target);
             }
-            var neighbourTiles = GetNeighbourTiles(currentTile, start, target);
+            
+            var neighbourTiles = GetNeighbourTiles(bound,currentTile, start, target);
 
             foreach (Tile neighbour in neighbourTiles)
             {
@@ -65,9 +66,9 @@ public class PathFinder
    //     return Mathf.Abs(start.WorldSpacePos.x - neighbour.WorldSpacePos.x) + Mathf.Abs(start.WorldSpacePos.y - neighbour.WorldSpacePos.y);
    // }
 
-    List<Tile> GetNeighbourTiles(Tile tile, Tile start, Tile target)
+    List<Tile> GetNeighbourTiles(Dictionary<Vector2Int, Tile> bound, Tile tile, Tile start, Tile target)
     {
-        var map = GameManager.Instance.MapManager.map;
+        var map = bound;
         var x = Mathf.Abs(start.TileKey.x - target.TileKey.x);
         var y = Mathf.Abs(start.TileKey.y - target.TileKey.y);
         
@@ -144,17 +145,16 @@ public class PathFinder
         }
         return neighbours;
     }
-    public List<Tile> InRange(float range, Tile start)
+    public Dictionary<Vector2Int,Tile> GetInRangeCircle(float range, Tile start)
     {
 
         var map = GameManager.Instance.MapManager.map;
-
-        List<Tile> inRangeTiles = new List<Tile>();
+        Dictionary <Vector2Int, Tile> inRangeTiles = new Dictionary<Vector2Int, Tile>();
 
         //int numPoints = 8;
-        
-        float radiusX = range * 0.75f;       
-        float radiusY = radiusX * 0.5f;
+
+        //float radiusX = range * 0.75f;       
+        //float radiusY = radiusX * 0.5f;
 
         Vector2Int center = new Vector2Int(start.TileKey.x, start.TileKey.y);
         int topBound = (int)center.y + (int)range;
@@ -162,22 +162,20 @@ public class PathFinder
         int leftBound = (int)center.x - (int)range;
         int rightBound = (int)center.x + (int)range;
 
-        
+
         for (int y = bottomBound; y <= topBound; y++)
         {
             for (int x = leftBound; x <= rightBound; x++)
             {
                 var tile = new Vector2Int(x, y);
-                if (inRange(center, tile, range) && map.ContainsKey(tile))
-                {                 
-                        inRangeTiles.Add(map[tile]);
-                        Debug.Log($"{tile}");                   
+                if (inRangeCircle(center, tile, range) && map.ContainsKey(tile))
+                {
+                    inRangeTiles.Add(tile, map[tile]);
                 }
-                
+
             }
         }
-
-        bool inRange(Vector2Int center, Vector2Int tile, float range)
+        bool inRangeCircle(Vector2Int center, Vector2Int tile, float range)
         {
             float dx = center.x - tile.x;
             float dy = center.y - tile.y;
@@ -186,5 +184,48 @@ public class PathFinder
             return distance <= range * range;
         }
         return inRangeTiles;
+    }
+    public Dictionary<Vector2Int, Tile> GetInRangeDiamond(float range, Tile start)
+    {
+
+        var map = GameManager.Instance.MapManager.map;
+
+        Dictionary<Vector2Int, Tile> inRangeTiles = new Dictionary<Vector2Int, Tile>();
+
+        Vector2Int center = new Vector2Int(start.TileKey.x, start.TileKey.y);
+        int topBound = (int)center.y + (int)range;
+        int bottomBound = (int)center.y - (int)range;
+        int leftBound = (int)center.x - (int)range;
+        int rightBound = (int)center.x + (int)range;
+
+
+        for (int y = bottomBound; y <= topBound; y++)
+        {
+            for (int x = leftBound; x <= rightBound; x++)
+            {
+                var tile = new Vector2Int(x, y);
+                if (inRangeDiamond(center, tile, range) && map.ContainsKey(tile))
+                {
+                    inRangeTiles.Add(tile,map[tile]);
+                }
+
+            }
+        }
+        bool inRangeDiamond(Vector2Int center, Vector2Int tile, float range)
+        {
+            float dx = Mathf.Abs(center.x - tile.x);
+            float dy = Mathf.Abs(center.y - tile.y);
+            float distance = dx + dy;
+
+            return distance <= range;
+        }      
+        return inRangeTiles;
+    }
+
+    public bool Walkable()
+    {
+        bool isWalkable = false;
+
+        return isWalkable;
     }
 }

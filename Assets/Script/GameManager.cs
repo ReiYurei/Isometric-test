@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour
     public MapManager MapManager;
     public SelectionManager SelectionManager;
     public UIManager UIManager;
-
+    public UnitManager UnitManager;
+    public MouseController MouseController;
+    public TurnQueueManager TurnQueueManager;
     void Awake()
     {
 
@@ -28,6 +30,9 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(MapManager);
             DontDestroyOnLoad(SelectionManager);
             DontDestroyOnLoad(UIManager);
+            DontDestroyOnLoad(UnitManager);
+            DontDestroyOnLoad(MouseController);
+            DontDestroyOnLoad(TurnQueueManager);
 
         }
     }

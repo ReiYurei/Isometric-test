@@ -9,9 +9,12 @@ public interface IInteractable
 
 public interface IBattleCommand
 {
+    bool IsFinished { get; }
+    int Priority { get; }
     int MotionWeight { get; }
-    int  UnitSpeed { get; }
-    void Execute(); 
+    int  TrueUnitSpeed { get; }
+    void Execute();
+
 }
 
 public interface IDamageable

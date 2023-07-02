@@ -133,6 +133,15 @@ public class UIManager : MonoBehaviour
 
 
                 break;
+
+            case SelectingTargetState:
+                foreach (GameObject action in actionUI.listOfAction)
+                {
+                    action.SetActive(false);
+                }
+                actionUI.endTurnButtonObj.SetActive(false);
+                actionUI.actionCommand.SetActive(false);
+                break;
             case ActionUIState:
                 var selectedInfo = GameManager.Instance.SelectionManager.SelectedInfo;
                 var unitStatus = selectedInfo.UnitStatus;

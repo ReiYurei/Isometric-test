@@ -29,53 +29,53 @@ public class Debugging : MonoBehaviour
     private void Start()
     {
         pathfinder = new PathFinder();
-        Actions.FindActionMap("Debug").FindAction("Click").performed += OnClickDebugging;
-        Actions.FindActionMap("Debug").Enable();
+        //Actions.FindActionMap("Debug").FindAction("Click").performed += OnClickDebugging;
+        //Actions.FindActionMap("Debug").Enable();
     }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Y))
         {
             var selection = GameManager.Instance.SelectionManager.SelectedInfo;
-            var RangePath = pathfinder.InRange(range, selection.Tile);
+            var RangePath = pathfinder.GetInRangeDiamond(range, selection.Tile);
 
-            foreach (Tile tile in RangePath)
-            {
-                tile.HideTile();
-            }
+           foreach (KeyValuePair<Vector2Int,Tile>tile in RangePath)
+           {
+               tile.Value.HideTile();
+           }
         }
         if (Input.GetKeyDown(KeyCode.T))
         {
             var selection = GameManager.Instance.SelectionManager.SelectedInfo;
-            var RangePath = pathfinder.InRange(range, selection.Tile);
-            foreach (Tile tile in RangePath)
-            {
-                tile.ShowTile();
-            }
+            var RangePath = pathfinder.GetInRangeDiamond(range, selection.Tile);
+           foreach (KeyValuePair<Vector2Int, Tile> tile in RangePath)
+           {
+               tile.Value.ShowTile();
+           }
         }
     }
     public void OnClickDebugging(InputAction.CallbackContext context)
     {
-        var selection = GameManager.Instance.SelectionManager.SelectedInfo;
-        var target = GameManager.Instance.SelectionManager.SelectedInfo;
-        if (selection.StandingObject != null)
-        {
-            startTile = selection.Tile;
-        }
-        else
-        {
-            targetTile = selection.Tile;
-        }
-        if (startTile != null && targetTile != null)
-        {
-            tilePath = pathfinder.FindPath(startTile ?? startTile, targetTile ?? targetTile);
-            foreach (Tile tile in tilePath)
-            {
-                tileKey.Add(tile.TileKey);
-                worldPos.Add(tile.WorldSpacePos);
-                tile.ShowTile();
-            }
-        }
+      //  var selection = GameManager.Instance.SelectionManager.SelectedInfo;
+      //  var target = GameManager.Instance.SelectionManager.SelectedInfo;
+      //  if (selection.StandingObject != null)
+      //  {
+      //      startTile = selection.Tile;
+      //  }
+      //  else
+      //  {
+      //      targetTile = selection.Tile;
+      //  }
+      //  if (startTile != null && targetTile != null)
+      //  {
+      //      tilePath = pathfinder.FindPath(startTile ?? startTile, targetTile ?? targetTile);
+      //      foreach (Tile tile in tilePath)
+      //      {
+      //          tileKey.Add(tile.TileKey);
+      //          worldPos.Add(tile.WorldSpacePos);
+      //          tile.ShowTile();
+      //      }
+      // }
 
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using System;
 
 
@@ -8,6 +9,8 @@ using System;
 [System.Serializable]
 public class UnitStatus
 {
+    public string UID { get => name; }
+    [SerializeField, Required] string uid;
     public string Name { get => name; }
     [SerializeField] string name;
     public float MaxHP { get => maxHP; }
@@ -20,12 +23,12 @@ public class UnitStatus
     public MapTerrain[] Walkable { get => walkable; }
     [SerializeField]MapTerrain[] walkable = new MapTerrain[4];
 
-    public int UnitSpeed
+    public int TrueUnitSpeed
     {
         get { return Mathf.RoundToInt(10000f / Speed); }
     }
 
-    public int TurnChances { get => turnChances; }
+    public int TurnChances { get => turnChances; set => turnChances = value; }
     [SerializeField] int turnChances;
     public int MoveRange { get => moveRange; }
     [SerializeField] int moveRange;
