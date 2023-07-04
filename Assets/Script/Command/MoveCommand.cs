@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 [System.Serializable]
 public class MoveCommand : IBattleCommand
 {
@@ -10,7 +10,7 @@ public class MoveCommand : IBattleCommand
     public Tile targetTile;
     public List<Tile> path;
     public float moveRange;
-
+    public List<MapTerrain> walkable;
     public bool IsFinished { get; set; }
     public int Priority { get; set ; }
 
@@ -21,7 +21,6 @@ public class MoveCommand : IBattleCommand
     public void OnClick()
     {       
     }
-
     public void Execute()
     {
         Move();

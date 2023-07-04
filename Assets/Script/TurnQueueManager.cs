@@ -53,9 +53,15 @@ public class TurnQueueManager : MonoBehaviour
 
     public void _ExecuteTurn()
     {
+        foreach (IBattleCommand command in commandsQueue)
+        {
+            Debug.Log(command);
+
+        }
         if (commandsQueue.Count == 0)
         {
             state.SetState(state.BattleBeginState);
+            return;
         }
         StopCoroutine("OnExecute");
         StartCoroutine("OnExecute");
@@ -64,26 +70,28 @@ public class TurnQueueManager : MonoBehaviour
     {
       
         
-        if (commandsQueue.Count > 0)
+        if (commandsQueue.Count == 0)
         {
-            if (commandsQueue[0].IsFinished == true)
-            {
-                RemoveCommand();
-                _ExecuteTurn();
-                yield break;
-
-            }
-            while (commandsQueue[0].IsFinished != true)
-            {
-                commandsQueue[0].Execute();
-                yield return null;
-            }
             _ExecuteTurn();
             yield break;
         }
-        
-        
-        
+        if (commandsQueue[0].IsFinished == true)
+        {
+            RemoveCommand();
+            _ExecuteTurn();
+            yield break;
+
+        }
+        while (commandsQueue[0].IsFinished != true)
+        {
+            commandsQueue[0].Execute();
+            yield return null;
+        }
+        _ExecuteTurn();
+        yield break;
+
+
+
 
     }
 }

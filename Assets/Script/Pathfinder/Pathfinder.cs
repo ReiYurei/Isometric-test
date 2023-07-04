@@ -5,7 +5,7 @@ using System.Linq;
 public class PathFinder
 {
 
-    public List<Tile> FindPath(Tile start, Tile target, Dictionary<Vector2Int,Tile> bound)
+    public List<Tile> FindPath(Tile start, Tile target, Dictionary<Vector2Int, Tile> bound, List<MapTerrain> walkable)
     {
         List<Tile> openList = new List<Tile>();
         List<Tile> closedList = new List<Tile>();
@@ -22,7 +22,7 @@ public class PathFinder
                 return GetFinishedPath(start, target);
             }
             
-            var neighbourTiles = GetNeighbourTiles(bound,currentTile, start, target);
+            var neighbourTiles = GetNeighbourTiles(bound,currentTile, start, target, walkable);
 
             foreach (Tile neighbour in neighbourTiles)
             {
@@ -66,14 +66,14 @@ public class PathFinder
    //     return Mathf.Abs(start.WorldSpacePos.x - neighbour.WorldSpacePos.x) + Mathf.Abs(start.WorldSpacePos.y - neighbour.WorldSpacePos.y);
    // }
 
-    List<Tile> GetNeighbourTiles(Dictionary<Vector2Int, Tile> bound, Tile tile, Tile start, Tile target)
+    List<Tile> GetNeighbourTiles(Dictionary<Vector2Int, Tile> bound, Tile tile, Tile start, Tile target, List<MapTerrain> walkable)
     {
         var map = bound;
         var x = Mathf.Abs(start.TileKey.x - target.TileKey.x);
         var y = Mathf.Abs(start.TileKey.y - target.TileKey.y);
         
         List<Tile> neighbours = new List<Tile>();
-
+        //if x < y && Walkable 
         if (x < y)
         {
             GetLeft();
@@ -100,7 +100,7 @@ public class PathFinder
         void GetTop()
         {
             Vector2Int tilekey = new Vector2Int(tile.TileKey.x, tile.TileKey.y + 1);
-            if (map.ContainsKey(tilekey))
+            if (map.ContainsKey(tilekey) && Walkable(tile, walkable) == true)
             {
                 neighbours.Add(map[tilekey]);
             }
@@ -113,7 +113,7 @@ public class PathFinder
           
             Vector2Int tilekey = new Vector2Int(tile.TileKey.x, tile.TileKey.y - 1);
 
-            if (map.ContainsKey(tilekey))
+            if ((map.ContainsKey(tilekey) && Walkable(tile, walkable) == true))
             {
                 neighbours.Add(map[tilekey]);
             }
@@ -125,7 +125,7 @@ public class PathFinder
             //Left
             Vector2Int tilekey = new Vector2Int(tile.TileKey.x - 1, tile.TileKey.y);
 
-            if (map.ContainsKey(tilekey))
+            if ((map.ContainsKey(tilekey) && Walkable(tile, walkable) == true))
             {
                 neighbours.Add(map[tilekey]);
             }
@@ -137,7 +137,7 @@ public class PathFinder
             //Right
             Vector2Int tilekey = new Vector2Int(tile.TileKey.x + 1, tile.TileKey.y);
 
-            if (map.ContainsKey(tilekey))
+            if ((map.ContainsKey(tilekey) && Walkable(tile, walkable) == true))
             {
                 neighbours.Add(map[tilekey]);
             }
@@ -222,10 +222,15 @@ public class PathFinder
         return inRangeTiles;
     }
 
-    public bool Walkable()
+    public bool Walkable(Tile tile, List<MapTerrain> walkable)
     {
-        bool isWalkable = false;
-
-        return isWalkable;
+        foreach (MapTerrain terrain in walkable)
+        {
+            if (tile.Terrain == terrain)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

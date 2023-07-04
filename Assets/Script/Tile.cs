@@ -16,6 +16,7 @@ public class Tile : MonoBehaviour
     public float FCost { get => HCost + GCost; }
     public Tile previousTile;
 
+
     public Color Color { get => color; }
     [SerializeField] Color color;
     public MapTerrain Terrain { get => terrain; }
@@ -71,6 +72,7 @@ public class Tile : MonoBehaviour
             
             this.unitObject = collision.gameObject;
             isOccuppied = true;
+            ChangeColor(color.r, color.g-1, color.b-1, color.a);
         }
 
 
@@ -79,6 +81,7 @@ public class Tile : MonoBehaviour
     {
         this.unitObject = null;
         isOccuppied = false;
+        ChangeColor(color.r, color.g+1, color.b+1, color.a);
     }
   
 }

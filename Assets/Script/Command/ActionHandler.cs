@@ -17,7 +17,7 @@ public class ActionHandler : MonoBehaviour
 
         var startTile = moveCommand.startTile = selectedUnit.Tile;
         var moveRange = moveCommand.moveRange = selectedUnit.UnitStatus.MoveRange;
-
+        moveCommand.walkable = selectedUnit.UnitStatus.Walkable;
         moveCommand.IsFinished = false;
         moveCommand.caster = selectedUnit.StandingObject;
         moveCommand.TrueUnitSpeed = selectedUnit.UnitStatus.TrueUnitSpeed;
@@ -38,26 +38,45 @@ public class ActionHandler : MonoBehaviour
         {
             var mouse =  GameManager.Instance.MouseController;
             var selectedTile = mouse.GetPositionOnTile();
-            var tile = selectedTile.Value.collider.gameObject.GetComponent<Tile>();
-            if (selectedTile.HasValue && tile.IsOccuppied == false)
-            {
-                var bound = pathfinder.GetInRangeDiamond(moveRange, startTile);
-                moveCommand.targetTile = tile;
-                List<Tile> tiles = pathfinder.FindPath(startTile, moveCommand.targetTile, bound);
-                moveCommand.path = tiles;
-                foreach (Tile _tile in tiles)
-                {
-                    Debug.Log(_tile.TileKey);
-                }
-                actions.FindActionMap("Action UI").FindAction("Click").performed -= OnMoveClick;
-                _AddCommand(moveCommand);
-                //EXPERIMENTAL
 
-                selectedUnit.UnitStatus.TurnChances--;
+            if (!selectedTile.HasValue)
+            {
+                actions.FindActionMap("Action UI").FindAction("Click").performed -= OnMoveClick;
                 state.SetState(state.PlayerActionState);
+                return;
+            }
+            var bound = pathfinder.GetInRangeDiamond(moveRange, startTile);
+            var tile = selectedTile.Value.collider.gameObject.GetComponent<Tile>();
+            if (tile.IsOccuppied)
+            {
+                actions.FindActionMap("Action UI").FindAction("Click").performed -= OnMoveClick;
+                state.SetState(state.PlayerActionState);
+                return;
+            }
+            foreach (MapTerrain terrain in selectedUnit.UnitStatus.Walkable)
+            {
+                Debug.Log(terrain);
             }
 
+            if (!pathfinder.Walkable(tile, selectedUnit.UnitStatus.Walkable) || !bound.ContainsKey(tile.TileKey))
+            {
+                actions.FindActionMap("Action UI").FindAction("Click").performed -= OnMoveClick;
+                state.SetState(state.PlayerActionState);
+                return;
+            }
+            moveCommand.targetTile = tile;
+            List<Tile> tiles = pathfinder.FindPath(startTile, moveCommand.targetTile, bound, selectedUnit.UnitStatus.Walkable);
+            moveCommand.path = tiles;
+            foreach (Tile _tile in tiles)
+            {
+                Debug.Log(_tile.TileKey);
+            }
+            actions.FindActionMap("Action UI").FindAction("Click").performed -= OnMoveClick;
+            _AddCommand(moveCommand);
+            //EXPERIMENTAL SET GHOST "POS" TO FUTURE POS, AND THEN LATER ON USE GHOST POS AS THE MAIN REFERENCE OF THE PATH FINDING
 
+            //selectedUnit.UnitStatus.TurnChances--;
+            state.SetState(state.PlayerActionState);
         }
     }
     public void _AttackCommand()
