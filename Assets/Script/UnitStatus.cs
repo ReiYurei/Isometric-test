@@ -20,8 +20,8 @@ public class UnitStatus
     public float Speed { get => speed;}
     [SerializeField] float speed;
 
-    public List<MapTerrain> Walkable { get => walkable; }
-    [SerializeField] List<MapTerrain> walkable = new List<MapTerrain>();
+    public List<TerrainTypes> Walkable { get => walkable; }
+    [SerializeField] List<TerrainTypes> walkable = new List<TerrainTypes>();
 
     public int TrueUnitSpeed
     {
@@ -36,4 +36,11 @@ public class UnitStatus
     [SerializeField] int attackPower;
     public bool IsFriendly { get => isFriendly; }
     [SerializeField] bool isFriendly;
+}
+
+[System.Serializable]
+public class TerrainTypes
+{
+    public MapTerrain walkableTerrain;
+    public int movePenalty;
 }

@@ -11,7 +11,7 @@ public class Unit : MonoBehaviour, IInteractable, IDamageable
     {
         var uid = status.UID;
         UnitManager.UnitInScene.Add(uid, this.gameObject);
-        Debug.Log(UnitManager.UnitInScene[uid]);
+        //Debug.Log(UnitManager.UnitInScene[uid]);
     }
     void OnDisable()
     {
@@ -24,7 +24,7 @@ public class Unit : MonoBehaviour, IInteractable, IDamageable
     void Start()
     {
         status.HealthPoint = status.MaxHP;
-        Debug.Log($"{gameObject.name}'s Speed = {status.TrueUnitSpeed}");
+        //Debug.Log($"{gameObject.name}'s Speed = {status.TrueUnitSpeed}");
     }
     
     public void Interact()

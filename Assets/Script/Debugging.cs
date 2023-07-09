@@ -34,25 +34,25 @@ public class Debugging : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            var selection = GameManager.Instance.SelectionManager.SelectedInfo;
-            var RangePath = pathfinder.GetInRangeDiamond(range, selection.Tile);
-
-           foreach (KeyValuePair<Vector2Int,Tile>tile in RangePath)
-           {
-               tile.Value.HideTile();
-           }
-        }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            var selection = GameManager.Instance.SelectionManager.SelectedInfo;
-            var RangePath = pathfinder.GetInRangeDiamond(range, selection.Tile);
-           foreach (KeyValuePair<Vector2Int, Tile> tile in RangePath)
-           {
-               tile.Value.ShowTile();
-           }
-        }
+        //if (Input.GetKeyDown(KeyCode.Y))
+        //{
+        //    var selection = GameManager.Instance.SelectionManager.SelectedInfo;
+        //    var RangePath = pathfinder.GetInRangeDiamond(range, selection.Tile);
+        //
+        //   foreach (KeyValuePair<Vector2Int,Tile>tile in RangePath)
+        //   {
+        //       tile.Value.HideTile();
+        //   }
+        //}
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    var selection = GameManager.Instance.SelectionManager.SelectedInfo;
+        //    var RangePath = pathfinder.GetInRangeDiamond(range, selection.Tile);
+        //   foreach (KeyValuePair<Vector2Int, Tile> tile in RangePath)
+        //   {
+        //       tile.Value.ShowTile();
+        //   }
+        //}
     }
     public void OnClickDebugging(InputAction.CallbackContext context)
     {

@@ -9,6 +9,8 @@ public class SelectionInfo
     public MapTerrain Terrain;
     public Vector2Int TileKey;
     public Vector3 WorldSpacePos;
+    public bool IsOccupied;
+    public int TotalPenalty = 0;
 
     public GameObject StandingObject;
 

@@ -15,6 +15,8 @@ public class SelectionManager : MonoBehaviour
         SelectedInfo.TileKey = tileKey;
         SelectedInfo.WorldSpacePos = worldSpacePos;
         SelectedInfo.Terrain = SelectedInfo.Tile.Terrain;
+        SelectedInfo.IsOccupied = SelectedInfo.Tile.IsOccuppied;
+        SelectedInfo.TotalPenalty = SelectedInfo.Tile.TotalPenalty;
         OnSelectUnitInfo();
 
     }

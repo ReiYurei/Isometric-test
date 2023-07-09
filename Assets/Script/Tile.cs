@@ -30,6 +30,9 @@ public class Tile : MonoBehaviour
     public bool IsOccuppied { get => isOccuppied; }
     [SerializeField] bool isOccuppied;
 
+    public int MovementPenalty;
+    public int TotalPenalty;
+
     void Awake()
     {
         

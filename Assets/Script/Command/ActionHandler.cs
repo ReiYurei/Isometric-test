@@ -17,7 +17,8 @@ public class ActionHandler : MonoBehaviour
 
         var startTile = moveCommand.startTile = selectedUnit.Tile;
         var moveRange = moveCommand.moveRange = selectedUnit.UnitStatus.MoveRange;
-        moveCommand.walkable = selectedUnit.UnitStatus.Walkable;
+        var walkable =moveCommand.walkable = selectedUnit.UnitStatus.Walkable;
+
         moveCommand.IsFinished = false;
         moveCommand.caster = selectedUnit.StandingObject;
         moveCommand.TrueUnitSpeed = selectedUnit.UnitStatus.TrueUnitSpeed;
@@ -27,7 +28,7 @@ public class ActionHandler : MonoBehaviour
         state.SetState(state.SelectingTargetState);
         actions.FindActionMap("Action UI").FindAction("Click").performed += OnMoveClick;
 
-        var bound = pathfinder.GetInRangeDiamond(moveRange, startTile);
+        var bound = pathfinder.GetInRangeDiamond(moveRange, startTile, walkable);
         foreach (KeyValuePair<Vector2Int, Tile> tile in bound)
         {
             tile.Value.ShowTile();
@@ -45,27 +46,17 @@ public class ActionHandler : MonoBehaviour
                 state.SetState(state.PlayerActionState);
                 return;
             }
-            var bound = pathfinder.GetInRangeDiamond(moveRange, startTile);
+            var bound = pathfinder.GetInRangeDiamond(moveRange, startTile, walkable);
             var tile = selectedTile.Value.collider.gameObject.GetComponent<Tile>();
-            if (tile.IsOccuppied)
+            if (!pathfinder.Walkable(tile, selectedUnit.UnitStatus.Walkable) || !bound.ContainsKey(tile.TileKey) || tile.IsOccuppied)
             {
                 actions.FindActionMap("Action UI").FindAction("Click").performed -= OnMoveClick;
                 state.SetState(state.PlayerActionState);
                 return;
             }
-            foreach (MapTerrain terrain in selectedUnit.UnitStatus.Walkable)
-            {
-                Debug.Log(terrain);
-            }
-
-            if (!pathfinder.Walkable(tile, selectedUnit.UnitStatus.Walkable) || !bound.ContainsKey(tile.TileKey))
-            {
-                actions.FindActionMap("Action UI").FindAction("Click").performed -= OnMoveClick;
-                state.SetState(state.PlayerActionState);
-                return;
-            }
+         
             moveCommand.targetTile = tile;
-            List<Tile> tiles = pathfinder.FindPath(startTile, moveCommand.targetTile, bound, selectedUnit.UnitStatus.Walkable);
+            List<Tile> tiles = pathfinder.FindPath(startTile, moveCommand.targetTile, bound);
             moveCommand.path = tiles;
             foreach (Tile _tile in tiles)
             {
